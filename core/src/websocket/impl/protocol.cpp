@@ -204,7 +204,7 @@ CloseStatus ReadWSFrameImpl(
         return CloseStatus::kProtocolError;
     }
 
-    if (payload_len + frame.payload->size() > max_payload_size) {
+    if (payload_len > max_payload_size || frame.payload->size() > max_payload_size - payload_len) {
         return CloseStatus::kTooBigData;
     }
 
